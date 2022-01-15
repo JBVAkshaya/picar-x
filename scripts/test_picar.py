@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1, '/home/akshaya/winter2022/intro2/code/picar-x/lib')
+sys.path.insert(1, '../../picar-x/lib')
 from picarx_improved import Picarx
 import time
 
