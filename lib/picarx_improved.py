@@ -15,12 +15,19 @@ IS_PI = False
 try:
     #TODO: change of rpi
     # import ezblock 
+    logging.debug('in try')
     from servo import Servo 
+    logging.debug('servo')
     from pwm import PWM
+    logging.debug('pwm')
     from pin import Pin
+    logging.debug('pin')
     from adc import ADC
+    logging.debug('adc')
     from filedb import fileDB
+    logging.debug('filedb')
     IS_PI = True
+    logging.debug('is pi')
 except:
     from sim_ezblock import Servo, PWM, Pin, ADC
     from filedb import fileDB
