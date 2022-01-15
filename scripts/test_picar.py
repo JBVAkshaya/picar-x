@@ -14,4 +14,4 @@ logging.getLogger().setLevel(logging.DEBUG)
 if __name__ == "__main__":
     px = Picarx()
     px.forward(50)
-    time.sleep(1)
+    time.sleep(0.2)
