@@ -14,7 +14,7 @@ IS_PI = False
 
 try:
     #TODO: change of rpi
-    import ezblock 
+    # import ezblock 
     from servo import Servo 
     from pwm import PWM
     from pin import Pin
