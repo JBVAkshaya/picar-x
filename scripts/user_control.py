@@ -11,6 +11,6 @@ logging.getLogger().setLevel(logging.DEBUG)
 
 if __name__=="__main__":
     while(1):
-        val = input('Enter action: \n To move straight: 8, \n To park right: 6, \n To park left: 4, \n To make K turn: 5')
-    logging.debug("Entered val: %d", val)
+        val = input('To move straight: 8, \n To park right: 6, \n To park left: 4, \n To make K turn: 5 \n Enter action:')
+        logging.debug(" \n Entered val: %d", val)
 
