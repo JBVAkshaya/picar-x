@@ -19,6 +19,8 @@ def move_straight():
     time.sleep(0.1)
     px.backward(50)
     time.sleep(0.5)
+    px.stop()
+    time.sleep(0.1)
 
 def park_left():
     px = Picarx()
@@ -136,6 +138,8 @@ def k_turn():
     ## Move front
     px.forward(35)
     time.sleep(1.5)
+    px.stop()
+    time.sleep(0.1)
 
 if __name__ == "__main__":
     ## Move the robot forward and backward
