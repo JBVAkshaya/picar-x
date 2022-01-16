@@ -64,7 +64,7 @@ def park_left():
 def park_right():
     px = Picarx()
 
-    ## Turn wheels right
+    ## Turn wheels left
     for angle in range(0,-35, -1):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
@@ -84,7 +84,7 @@ def park_right():
     px.stop()
     time.sleep(0.1)
 
-    ## Move back while steering to right. Thish will straighten the car
+    ## Move back while steering to left. Thish will straighten the car
     for angle in range(0,-25, -1):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
@@ -102,8 +102,23 @@ def park_right():
     px.stop()
     time.sleep(0.1)
 
+def turn_left(px):
+    for angle in range(0,-30, -1):
+        px.set_dir_servo_angle(angle)
+        time.sleep(0.01)
+    px.forward(35)
+    time.sleep(1)
+    for angle in range(-30, 0):
+        px.set_dir_servo_angle(angle)
+        time.sleep(0.01)
+    
+
+def k_turn(px):
+    turn_left(px)
 
 if __name__ == "__main__":
     # move_straight()
-    park_left()
-    park_right()
+    # park_left()
+    # park_right()
+    px = Picarx()
+    k_turn(px)
