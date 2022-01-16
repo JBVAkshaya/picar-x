@@ -116,7 +116,7 @@ def from_left_to_back_straight(px):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
     px.backward(35)
-    time.sleep(2.5)
+    time.sleep(2.6)
     px.stop()
     time.sleep(0.1)
 
@@ -124,7 +124,7 @@ def k_turn(px):
     ## Turn left 
     turn_left(px)
 
-    ## Turn right
+    ## Turn robot wheels right and move back to straighten the robot pos
     from_left_to_back_straight(px)
     
     ## Straighten wheels
@@ -137,8 +137,13 @@ def k_turn(px):
     time.sleep(1.8)
 
 if __name__ == "__main__":
+    ## Move the robot forward and backward
     # move_straight()
+
+    ## Parallel park left and right
     # park_left()
     # park_right()
+
+    ## K turn
     px = Picarx()
     k_turn(px)
