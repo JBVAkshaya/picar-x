@@ -43,13 +43,13 @@ def park_left():
     px.set_dir_servo_angle(25)
     time.sleep(0.1)
     px.backward(30)
-    time.sleep(1)
+    time.sleep(1.1)
     px.set_dir_servo_angle(0)
     time.sleep(0.1)
     px.stop()
     time.sleep(1)
     px.forward(20)
-    time.sleep(1)
+    time.sleep(2)
 
 
 
