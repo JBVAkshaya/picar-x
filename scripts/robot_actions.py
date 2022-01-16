@@ -24,16 +24,26 @@ def park_left():
     px = Picarx()
     px.set_dir_servo_angle(0)
     time.sleep(0.1)
-    for angle in range(0,-15,-1):
+    for angle in range(0,25,-1):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
     px.forward(20)
     time.sleep(0.5)
-    for angle in range(-15,0):
-        px.set_dir_servo_angle(angle)
-        time.sleep(0.01)
+    px.stop()
+    time.sleep(1)
+    # for angle in range(-15,0):
+    #     px.set_dir_servo_angle(angle)
+    #     time.sleep(0.01)
     px.backward(20)
-    time.sleep(0.2)
+    time.sleep(0.8)
+    px.stop()
+    time.sleep(1)
+    px.set_dir_servo_angle(0)
+    time.sleep(0.1)
+    px.forward(20)
+    time.sleep(0.5)
+    px.stop()
+    time.sleep(1)
 
 
 
