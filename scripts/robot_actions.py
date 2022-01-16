@@ -28,7 +28,7 @@ def park_left():
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
     px.forward(50)
-    time.sleep(0.2)
+    time.sleep(0.5)
     px.stop()
     time.sleep(1)
     # for angle in range(-15,0):
