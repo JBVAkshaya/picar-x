@@ -14,9 +14,9 @@ logging.getLogger().setLevel(logging.DEBUG)
 def move_straight():
     px = Picarx()
     px.forward(50)
-    time.sleep(0.2)
+    time.sleep(0.5)
     px.backward(50)
-    time.sleep(0.2)
+    time.sleep(0.5)
 
 if __name__ == "__main__":
     move_straight()
