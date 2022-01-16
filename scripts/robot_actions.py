@@ -120,8 +120,9 @@ def from_left_to_back_straight(px):
     px.stop()
     time.sleep(0.1)
 
-def k_turn(px):
+def k_turn():
     ## Turn left 
+    px = Picarx()
     turn_left(px)
 
     ## Turn robot wheels right and move back to straighten the robot pos
@@ -145,5 +146,5 @@ if __name__ == "__main__":
     # park_right()
 
     ## K turn
-    px = Picarx()
-    k_turn(px)
+    
+    k_turn()

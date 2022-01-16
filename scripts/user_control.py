@@ -11,6 +11,15 @@ logging.getLogger().setLevel(logging.DEBUG)
 
 if __name__=="__main__":
     while(1):
-        val = input('To move straight: 8, \n To park right: 6, \n To park left: 4, \n To make K turn: 5 \n Enter action:')
+        val = int(input('To move straight: 8, \n To park right: 6, \n To park left: 4, \n To make K turn: 5 \n Enter action:'))
         logging.debug(" \n Entered val: %d", val)
-
+        if val == 8:
+            move_straight()
+        elif val == 6:
+            park_right()
+        elif val == 4:
+            park_left()
+        elif val == 5:
+            k_turn()
+        else:
+            logging.error('Entered invalid action.')
