@@ -36,7 +36,7 @@ def park_left():
     #     time.sleep(0.01)
     px.set_dir_servo_angle(0)
     time.sleep(0.1)
-    px.backward(20)
+    px.backward(30)
     time.sleep(1)
     px.stop()
     time.sleep(1)
