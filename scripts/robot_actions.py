@@ -110,6 +110,8 @@ def turn_left(px):
     time.sleep(1.8)
     px.stop()
     time.sleep(0.1)
+
+def from_left_to_back_straight(px):
     for angle in range(-30, 30):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
@@ -119,7 +121,20 @@ def turn_left(px):
     time.sleep(0.1)
 
 def k_turn(px):
+    ## Turn left 
     turn_left(px)
+
+    ## Turn right
+    from_left_to_back_straight(px)
+    
+    ## Straighten wheels
+    for angle in range(30, 0, -1):
+        px.set_dir_servo_angle(angle)
+        time.sleep(0.01)
+    
+    ## Move front
+    px.forward(35)
+    time.sleep(1.8)
 
 if __name__ == "__main__":
     # move_straight()
