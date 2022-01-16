@@ -116,7 +116,7 @@ def from_left_to_back_straight(px):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
     px.backward(35)
-    time.sleep(2.6)
+    time.sleep(2.8)
     px.stop()
     time.sleep(0.1)
 
@@ -134,7 +134,7 @@ def k_turn(px):
     
     ## Move front
     px.forward(35)
-    time.sleep(1.8)
+    time.sleep(1.5)
 
 if __name__ == "__main__":
     ## Move the robot forward and backward
