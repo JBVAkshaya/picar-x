@@ -107,7 +107,7 @@ def turn_left(px):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
     px.forward(35)
-    time.sleep(1)
+    time.sleep(2)
     for angle in range(-30, 0):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
