@@ -22,7 +22,7 @@ def move_straight():
 
 def park_left():
     px = Picarx()
-    for angle in range(10,-10,-1):
+    for angle in range(-10,-25,-1):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
 
