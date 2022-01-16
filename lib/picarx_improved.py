@@ -40,8 +40,9 @@ class Picarx(object):
     TIMEOUT = 0.02
 
     def __init__(self):
-        atexit.register(self.set_motor_speed, 1,0)
-        atexit.register(self.set_motor_speed, 2,0)
+
+        atexit.register(self.cleanup)
+
         if IS_PI ==False:
             logging.debug('Raspberry pi not present.')
         else:
@@ -80,7 +81,9 @@ class Picarx(object):
                 pin.period(self.PERIOD)
                 pin.prescaler(self.PRESCALER)
         
-
+    def cleanup(self):
+        self.set_motor_speed(1,0)
+        self.set_motor_speed(2,0)
 
     def set_motor_speed(self,motor,speed):
         if IS_PI == True:
