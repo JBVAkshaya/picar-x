@@ -38,6 +38,8 @@ class Sensor(object):
 
         if ((diff_l_r < diff_r_c) and (diff_l_r < diff_l_c)):
             sensitivity = diff_l_r + (min(diff_l_c, diff_r_c) - diff_l_r)/2.0
+            if sensitivity <60:
+                raise SensitivityException(f"Cannot differentiate Background and line in sensor space.\nVals: {sensor_vals}")
         else:
             raise SensitivityException(f"Bizar sensor reading: {sensor_vals}.\nSet the robot so that center sensor is on line and left and right sensors on ground")
         
