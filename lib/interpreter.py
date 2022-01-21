@@ -17,7 +17,7 @@ class Interpreter(object):
         slightly off-center. Make this function robust to different lighting conditions, and with an
         option to have the “target” darker or lighter than the surrounding floor.
         '''
-        logging.debug("sensor vals: {sensor_vals}")
+        logging.debug(f"sensor vals: {sensor_vals}")
         pass
 
     def output(self):
