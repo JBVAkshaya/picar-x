@@ -56,15 +56,15 @@ class Sensor(object):
             polarity = self.get_polarity(sensor_vals)
             sensitivity = self.get_sensitivity(sensor_vals)
         except PolarityException as e:
-            logging.error(e)
+            logging.exception(e)
         except SensitivityException as e:
             polarity = -1
-            logging.error(e)
+            logging.exception(e)
         except EnvException as e:
             polarity = -1
-            logging.error(e)    
+            logging.exception(e)    
         except Exception as e:
-            logging.error(f"Unknown error: {e}")
+            logging.exception(f"Unknown error: {e}")
         return polarity, sensitivity
 
 
