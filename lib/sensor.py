@@ -8,6 +8,9 @@ class PolarityException(Exception):
 class SensitivityException(Exception):
     pass
 
+class EnvException(Exception):
+    pass
+
 class Sensor(object):
     def __init__(self):
         self.chn_0 = ADC("A0")
@@ -39,9 +42,7 @@ class Sensor(object):
         if ((diff_l_r < diff_r_c) and (diff_l_r < diff_l_c)):
             sensitivity = diff_l_r + (min(diff_l_c, diff_r_c) - diff_l_r)/2.0
             if sensitivity <60:
-                raise Exception([
-                    SensitivityException(f"Cannot differentiate Background and line in sensor space.\nVals: {sensor_vals}"),
-                    PolarityException()])
+                raise EnvException(f"Cannot differentiate Background and line in sensor space.\nVals: {sensor_vals}")
         else:
             raise SensitivityException(f"Bizar sensor reading: {sensor_vals}.\nSet the robot so that center sensor is on line and left and right sensors on ground")
         
@@ -59,6 +60,9 @@ class Sensor(object):
         except SensitivityException as e:
             polarity = -1
             logging.error(e)
+        except EnvException as e:
+            polarity = -1
+            logging.error(e)    
         except Exception as e:
             logging.error(f"Unknown error: {e}")
         return polarity, sensitivity
@@ -69,5 +73,5 @@ if __name__=="__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.debug(f"Sensor reading: {sensor.sensor_reading()}")
     logging.info("Calibrating...")
-    logging.info(f"Sensor sensitivity and Polarity: {sensor.calibrate()}")
+    logging.info(f"Sensor Polarity and sensitivity: {sensor.calibrate()}")
 
