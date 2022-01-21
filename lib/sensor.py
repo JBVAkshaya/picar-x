@@ -55,6 +55,7 @@ class Sensor(object):
         except PolarityException as e:
             logging.error(e)
         except SensitivityException as e:
+            polarity = -1
             logging.error(e)
         except Exception as e:
             logging.error(f"Unknown error: {e}")
