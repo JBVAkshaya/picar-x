@@ -64,5 +64,5 @@ if __name__=="__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.debug(f"Sensor reading: {sensor.sensor_reading()}")
     logging.info("Calibrating...")
-    sensor.calibrate()
+    logging.info(f"Sensor sensitivity and Polarity: {sensor.calibrate()}")
 
