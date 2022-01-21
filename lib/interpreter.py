@@ -1,6 +1,8 @@
 import logging
 from sensor import Sensor
 
+logging.basicConfig(level=logging.DEBUG)
+
 class Interpreter(object):
     def __init__(self, polarity, sensitivity):
         self.sensitivity = sensitivity
