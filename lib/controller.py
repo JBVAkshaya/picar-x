@@ -25,7 +25,12 @@ if __name__=="__main__":
     polarity, sensitivity = sensor.calibrate()
     interpret = Interpreter(polarity, sensitivity)
     car = Picarx()
-    controller = Controller(car, interpret.output(sensor.sensor_reading()),20)
-    while(1):
+    robot_position = interpret.output(sensor.sensor_reading())
+    controller = Controller(car, robot_position, 20)
+    
+    while(robot_position!=5.0):
         sensor_vals = sensor.sensor_reading()
-        controller.control(interpret.output(sensor_vals), 20)
+        robot_position = interpret.output(sensor_vals)
+        controller.control(robot_position, 20)
+        car.forward(20)
+    car.stop()

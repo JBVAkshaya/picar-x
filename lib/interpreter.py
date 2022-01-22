@@ -62,10 +62,10 @@ class Interpreter(object):
             self.prev_output = 0.0
             return 0.0
         elif robot_position == 'l':
-            self.prev_output = -0.33
-            return -0.33
+            self.prev_output = 0.33
+            return 0.33
         elif robot_position == 'l+':
-            self.prev_output = -0.66
+            self.prev_output = 0.66
             return -0.66
         elif robot_position == 'r':
             self.prev_output = 0.33
@@ -74,12 +74,14 @@ class Interpreter(object):
             self.prev_output = 0.66
             return 0.66
         elif robot_position == 'o':
-            if self.prev_output > 0.0:
-                return 1.0
-            elif self.prev_output < 0.0:
-                return -1.0
-            else:
-                return 0.0
+            # if self.prev_output > 0.0:
+            #     return 1.0
+            # elif self.prev_output < 0.0:
+            #     return -1.0
+            # else:
+            #     return 0.0
+            logging.error(f"Out of range robot position: {robot_position}")
+            return 5.0
         else:
             logging.error(f"Unknown Robot Position: {robot_position}")
             return 5.0
