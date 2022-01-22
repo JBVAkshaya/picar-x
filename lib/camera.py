@@ -131,12 +131,12 @@ if __name__=="__main__":
     cam = Camera()
     for frame in cam.camera.capture_continuous(cam.rawCapture, format="bgr",use_video_port=True):
         bgr, mask, edges, lines = cam.detect_lane(frame.array)
-        # line_image = cam.display_lines(bgr,lines)
+        line_image = cam.display_lines(bgr,lines)
         cv2.imshow("video", bgr)
         cv2.imshow("mask", mask)
         cv2.imshow("lines", edges)
         # logging.debug(df"{lines}")
-        # cv2.imshow("edges", line_image)
+        cv2.imshow("edges", line_image)
         cam.rawCapture.truncate(0)
         k = cv2.waitKey(1) & 0xFF
         # 27 is the ESC key, which means that if you press the ESC key to exit
