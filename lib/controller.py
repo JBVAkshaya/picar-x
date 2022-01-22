@@ -28,4 +28,4 @@ if __name__=="__main__":
     controller = Controller(car, interpret.output(sensor.sensor_reading(),10))
     while(1):
         sensor_vals = sensor.sensor_reading()
-        controller.control(car, interpret.output(sensor_vals), 10)
+        controller.control(interpret.output(sensor_vals), 10)
