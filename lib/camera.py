@@ -120,10 +120,13 @@ class Camera(object):
     
     def display_lines(frame, lines, line_color=(0, 255, 0), line_width=2):
         line_image = np.zeros_like(frame)
-        if lines is not None:
-            for line in lines:
-                for x1, y1, x2, y2 in line:
-                    cv2.line(line_image, (x1, y1), (x2, y2), line_color, line_width)
+        logging.debug(f"lines: {lines}")
+        logging.debug(f"line cord: {lines[0][0]}")
+        x1,y1,x2,y2 = lines[0][0]
+        # if lines is not None:
+        #     for line in lines:
+        #         for x1, y1, x2, y2 in line:
+        cv2.line(line_image, (x1, y1), (x2, y2), line_color, line_width)
         line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
         return line_image
 
