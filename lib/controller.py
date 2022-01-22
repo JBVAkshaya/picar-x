@@ -33,4 +33,4 @@ if __name__=="__main__":
         robot_position = interpret.output(sensor_vals)
         controller.control(robot_position, 20)
         car.forward(20)
-    car.stop()
+    # car.stop()
