@@ -5,7 +5,7 @@ from picamera import PiCamera
 import numpy as np
 import logging
 
-logging.basicConfig(level=logging.debug)
+logging.basicConfig(level=logging.DEBUG)
 
 class Camera(object):
     def __init__(self, resolution=(640,480), framerate=24):
