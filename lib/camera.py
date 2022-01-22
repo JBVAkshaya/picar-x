@@ -5,7 +5,7 @@ from picamera import PiCamera
 import numpy as np
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.ERROR)
 
 class Camera(object):
     def __init__(self, resolution=(640,480), framerate=24):
@@ -133,24 +133,22 @@ class Camera(object):
 if __name__=="__main__":
     cam = Camera()
     for frame in cam.camera.capture_continuous(cam.rawCapture, format="bgr",use_video_port=True):
-        try:
-            bgr, mask, edges, lines = cam.detect_lane(frame.array)
-            logging.debug(f"lines: {lines}")
-            if len(lines)>0:
-                logging.debug(f"line cord: {lines[0][0]}")
-                # 
-                cv2.imshow("video", bgr)
-                cv2.imshow("mask", mask)
-                cv2.imshow("lines", edges)
-                # logging.debug(df"{lines}")
-                # line_image = cam.display_lines(bgr,lines)
-                # cv2.imshow("edges", line_image)
-                cam.rawCapture.truncate(0)
-                k = cv2.waitKey(1) & 0xFF
-                # 27 is the ESC key, which means that if you press the ESC key to exit
-                if k == 27:
-                    cam.camera.close()
-                    break
-        except:
-            logging.debug("faulty frame")
-            continue
+
+        bgr, mask, edges, lines = cam.detect_lane(frame.array)
+        logging.error(f"lines: {lines, len(lines)}")
+
+        # if len(lines)>0:
+        #     logging.debug(f"line cord: {lines[0][0]}")
+            # 
+        cv2.imshow("video", bgr)
+        cv2.imshow("mask", mask)
+        cv2.imshow("lines", edges)
+        # logging.debug(df"{lines}")
+        # line_image = cam.display_lines(bgr,lines)
+        # cv2.imshow("edges", line_image)
+        cam.rawCapture.truncate(0)
+        k = cv2.waitKey(1) & 0xFF
+        # 27 is the ESC key, which means that if you press the ESC key to exit
+        if k == 27:
+            cam.camera.close()
+            break
