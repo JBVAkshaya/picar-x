@@ -54,9 +54,9 @@ class Camera(object):
         # tuning min_threshold, minLineLength, maxLineGap is a trial and error process by hand
         rho = 1  # distance precision in pixel, i.e. 1 pixel
         angle = np.pi / 180  # angular precision in radian, i.e. 1 degree
-        min_threshold = 5  # minimal of votes
+        min_threshold = 15 # minimal of votes
         line_segments = cv2.HoughLinesP(line_edges, rho, angle, min_threshold, 
-                                        np.array([]), minLineLength=8, maxLineGap=4)
+                                        np.array([]), minLineLength=4, maxLineGap=4)
 
         return line_segments
     
