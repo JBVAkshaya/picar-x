@@ -28,7 +28,7 @@ if __name__=="__main__":
     robot_position = interpret.output(sensor.sensor_reading())
     controller = Controller(car, robot_position, 20)
     
-    while(robot_position!=5.0):
+    while(1):
         sensor_vals = sensor.sensor_reading()
         robot_position = interpret.output(sensor_vals)
         controller.control(robot_position, 20)
