@@ -136,7 +136,7 @@ if __name__=="__main__":
         try:
             bgr, mask, edges, lines = cam.detect_lane(frame.array)
             logging.debug(f"lines: {lines}")
-            logging.debug(f"line cord: {lines[0][0]}")
+            # logging.debug(f"line cord: {lines[0][0]}")
             # 
             cv2.imshow("video", bgr)
             cv2.imshow("mask", mask)
@@ -152,3 +152,4 @@ if __name__=="__main__":
                 break
         except:
             logging.debug("faulty frame")
+            continue
