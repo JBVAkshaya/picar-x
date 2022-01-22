@@ -16,8 +16,8 @@ class Camera(object):
 
         # only focus bottom half of the screen
         polygon = np.array([[
-            (0, height * 1 / 3),
-            (width, height * 1 / 3),
+            (0, height * 2.2 / 3),
+            (width, height * 2.2 / 3),
             (width, height),
             (0, height),
         ]], np.int32)
