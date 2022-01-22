@@ -50,7 +50,7 @@ class Sensor(object):
 
     def calibrate(self):
         # Read sensor value:
-        polarity, sensitivity = -1, -1
+        polarity, sensitivity = 'Err', -1
         sensor_vals = self.sensor_reading()
         try:
             polarity = self.get_polarity(sensor_vals)
@@ -61,7 +61,7 @@ class Sensor(object):
             polarity = -1
             logging.exception(e)
         except EnvException as e:
-            polarity = -1
+            polarity = 'Err'
             logging.exception(e)    
         except Exception as e:
             logging.exception(f"Unknown error: {e}")
