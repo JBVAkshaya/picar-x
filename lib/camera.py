@@ -136,20 +136,21 @@ if __name__=="__main__":
         try:
             bgr, mask, edges, lines = cam.detect_lane(frame.array)
             logging.debug(f"lines: {lines}")
-            logging.debug(f"line cord: {lines[0][0]}")
-            # 
-            cv2.imshow("video", bgr)
-            cv2.imshow("mask", mask)
-            cv2.imshow("lines", edges)
-            # logging.debug(df"{lines}")
-            # line_image = cam.display_lines(bgr,lines)
-            # cv2.imshow("edges", line_image)
-            cam.rawCapture.truncate(0)
-            k = cv2.waitKey(1) & 0xFF
-            # 27 is the ESC key, which means that if you press the ESC key to exit
-            if k == 27:
-                cam.camera.close()
-                break
+            if len(lines)>0:
+                logging.debug(f"line cord: {lines[0][0]}")
+                # 
+                cv2.imshow("video", bgr)
+                cv2.imshow("mask", mask)
+                cv2.imshow("lines", edges)
+                # logging.debug(df"{lines}")
+                # line_image = cam.display_lines(bgr,lines)
+                # cv2.imshow("edges", line_image)
+                cam.rawCapture.truncate(0)
+                k = cv2.waitKey(1) & 0xFF
+                # 27 is the ESC key, which means that if you press the ESC key to exit
+                if k == 27:
+                    cam.camera.close()
+                    break
         except:
             logging.debug("faulty frame")
             continue
