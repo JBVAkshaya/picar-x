@@ -54,7 +54,7 @@ class Camera(object):
         # tuning min_threshold, minLineLength, maxLineGap is a trial and error process by hand
         rho = 1  # distance precision in pixel, i.e. 1 pixel
         angle = np.pi / 180  # angular precision in radian, i.e. 1 degree
-        min_threshold = 10  # minimal of votes
+        min_threshold = 5  # minimal of votes
         line_segments = cv2.HoughLinesP(line_edges, rho, angle, min_threshold, 
                                         np.array([]), minLineLength=8, maxLineGap=4)
 
@@ -98,7 +98,7 @@ class Camera(object):
                 logging.debug(f"slope, intercept: {slope, intercept}")
                 fit.append((slope,intercept))
 
-        fit_average = np.median(fit, axis=0)
+        fit_average = np.average(fit, axis=0)
         logging.debug(f"len fit, fit avg: {len(fit), fit_average}")
         if len(fit) > 0:
             lane_lines.append(self.make_points(fit_average))
