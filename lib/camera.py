@@ -113,7 +113,7 @@ class Camera(object):
         line_segments = self.detect_line_segments(edges)
         lane_lines = self.average_slope_intercept(line_segments)
         
-        return bgr, mask, lane_lines
+        return bgr, mask, edges, lane_lines
     
     def display_lines(frame, lines, line_color=(0, 255, 0), line_width=2):
         line_image = np.zeros_like(frame)
@@ -127,10 +127,11 @@ class Camera(object):
 if __name__=="__main__":
     cam = Camera()
     for frame in cam.camera.capture_continuous(cam.rawCapture, format="bgr",use_video_port=True):
-        bgr, mask, lines = cam.detect_lane(frame.array)
+        bgr, mask, edges, lines = cam.detect_lane(frame.array)
         line_image = cam.display_lines(bgr,lines)
         cv2.imshow("video", bgr)
         cv2.imshow("mask", mask)
+        cv2.imshow("lines", edges)
         cv2.imshow("edges", line_image)
         cam.rawCapture.truncate(0)
         k = cv2.waitKey(1) & 0xFF
