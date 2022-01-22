@@ -39,7 +39,7 @@ class Camera(object):
         return bgr, mask, line_edges
     
     def make_points(self, line):
-        height, width, _ = self.camera.resolution
+        (height, width) = self.camera.resolution
         slope, intercept = line
         y1 = height  # bottom of the frame
         y2 = int(y1 * 1 / 2)  # make points from middle of the frame down
@@ -94,9 +94,11 @@ class Camera(object):
                 #     if x1 > right_region_boundary and x2 > right_region_boundary:
                 #         right_fit.append((slope, intercept))
                 slope, intercept = np.polyfit((x1, x2), (y1, y2), 1)
+                logging.debug(f"slope, intercept: {slope, intercept}")
                 fit.append((slope,intercept))
 
         fit_average = np.median(fit, axis=0)
+        logging.debug(f"len fit, fit avg: {len(fit), fit_average}")
         if len(fit) > 0:
             lane_lines.append(self.make_points(fit_average))
 
