@@ -25,7 +25,7 @@ if __name__=="__main__":
     polarity, sensitivity = sensor.calibrate()
     interpret = Interpreter(polarity, sensitivity)
     car = Picarx()
-    controller = Controller(interpret.output(sensor.sensor_reading(),10))
+    controller = Controller(car, interpret.output(sensor.sensor_reading(),10))
     while(1):
         sensor_vals = sensor.sensor_reading()
-        controller.control(interpret.output(sensor_vals), 10)
+        controller.control(car, interpret.output(sensor_vals), 10)
