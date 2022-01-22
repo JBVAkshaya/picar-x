@@ -118,7 +118,7 @@ class Camera(object):
         lane_lines = self.average_slope_intercept(line_segments)
         return bgr, mask, edges, lane_lines
     
-    def display_lines(frame, lines, line_color=(0, 255, 0), line_width=2):
+    def display_lines(self, frame, lines, line_color=(0, 255, 0), line_width=2):
         line_image = np.zeros_like(frame)
         logging.debug(f"lines: {lines}")
         logging.debug(f"line cord: {lines[0][0]}")
