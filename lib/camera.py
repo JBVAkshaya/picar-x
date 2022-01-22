@@ -140,6 +140,7 @@ if __name__=="__main__":
         if len(lines)>0:
             logging.error(f"line cord: {lines[0][0]}")
             line_image = cam.display_lines(bgr,lines)
+            cv2.imshow("edges", line_image)
 
             # 
         cv2.imshow("video", bgr)
