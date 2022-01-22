@@ -10,8 +10,14 @@ class Camera(object):
         self.camera.framerate = framerate
         self.rawCapture = PiRGBArray(self.camera, size=self.camera.resolution) 
 
-    def get_bgrimage(self):
-        pass
+    def get_line_edges(self, bgr, h_lower = 60, h_upper = 150):
+        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+        lower_blue = np.array([h_lower, 40, 40])
+        upper_blue = np.array([h_upper, 255, 255])
+        mask = cv2.inRange(hsv, lower_blue, upper_blue)
+        edges = cv2.Canny(mask, 200, 400)
+        # line_edges = 
+        return bgr, mask, edges
 
 if __name__=="__main__":
     cam = Camera()
