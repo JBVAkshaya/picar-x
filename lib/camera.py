@@ -1,3 +1,4 @@
+from re import L
 import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
@@ -115,7 +116,6 @@ class Camera(object):
         line_segments = self.detect_line_segments(edges)
         logging.debug(f"all line segments: {line_segments}")
         lane_lines = self.average_slope_intercept(line_segments)
-        logging.debug(f"all detect lane returns: {bgr, mask, edges, lane_lines}")
         return bgr, mask, edges, lane_lines
     
     def display_lines(frame, lines, line_color=(0, 255, 0), line_width=2):
@@ -134,7 +134,8 @@ if __name__=="__main__":
     cam = Camera()
     for frame in cam.camera.capture_continuous(cam.rawCapture, format="bgr",use_video_port=True):
         bgr, mask, edges, lines = cam.detect_lane(frame.array)
-        # logging.debug
+        logging.debug(f"lines: {lines}")
+        logging.debug(f"line cord: {lines[0][0]}")
         # 
         cv2.imshow("video", bgr)
         cv2.imshow("mask", mask)
