@@ -28,7 +28,7 @@ class Camera(object):
 
     def get_line_edges(self, bgr, h_lower = 60, h_upper = 150):
         hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-        lower_blue = np.array([h_lower, 70, 70])
+        lower_blue = np.array([h_lower, 50, 50])
         upper_blue = np.array([h_upper, 255, 255])
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
         edges = cv2.Canny(mask, 200, 400)
