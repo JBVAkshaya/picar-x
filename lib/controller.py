@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 class Controller(object):
     def __init__(self, car, offset, turn_angle):
         self.car = car
-        self.car.set_dir_servo_angle(offset*turn_angle)
+        self.car.set_dir_servo_angle(int(-offset*turn_angle))
 
     def control (self, offset, steer_angle):
         '''
