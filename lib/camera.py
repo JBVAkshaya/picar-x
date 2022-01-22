@@ -137,8 +137,10 @@ if __name__=="__main__":
         bgr, mask, edges, lines = cam.detect_lane(frame.array)
         logging.error(f"lines: {lines, len(lines)}")
 
-        # if len(lines)>0:
-        #     logging.debug(f"line cord: {lines[0][0]}")
+        if len(lines)>0:
+            logging.error(f"line cord: {lines[0][0]}")
+            line_image = cam.display_lines(bgr,lines)
+
             # 
         cv2.imshow("video", bgr)
         cv2.imshow("mask", mask)
