@@ -132,7 +132,7 @@ class Camera(object):
         if len(lane_lines)>1:
             angle_to_mid_radian = math.atan(x_offset / y_offset)  # angle (in radian) to center vertical line
             angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  # angle (in degrees) to center vertical line
-            steering_angle = angle_to_mid_deg + 90  # this is the steering angle needed by picar front wheel
+            steering_angle = -angle_to_mid_deg  # this is the steering angle needed by picar front wheel
             return bgr, mask, edges, lane_lines, steering_angle
         else:
             logging.error("no lane")
