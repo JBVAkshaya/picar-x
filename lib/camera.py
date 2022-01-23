@@ -184,6 +184,7 @@ if __name__=="__main__":
             line_image = cam.display_lines(bgr,lines)
             cv2.imshow("edges", line_image)
             heading_img = cam.display_heading_line(line_image, steer_angle)
+            logging.debug(f"angle:{steer_angle}")
             cv2.imshow("steer dir", heading_img)
             # 
         cv2.imshow("video", bgr)
