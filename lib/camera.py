@@ -5,6 +5,7 @@ from picamera import PiCamera
 import numpy as np
 import logging
 import math
+from picarx_improved import Picarx
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -174,6 +175,7 @@ class Camera(object):
         return heading_image
 if __name__=="__main__":
     cam = Camera()
+    car = Picarx()
     for frame in cam.camera.capture_continuous(cam.rawCapture, format="bgr",use_video_port=True):
 
         bgr, mask, edges, lines, steer_angle = cam.detect_lane(frame.array)
@@ -185,6 +187,7 @@ if __name__=="__main__":
             cv2.imshow("edges", line_image)
             heading_img = cam.display_heading_line(line_image, steer_angle)
             logging.debug(f"angle:{-(steer_angle -90)}")
+            self.car.set_dir_servo_angle(-(steer_angle -90))
             cv2.imshow("steer dir", heading_img)
             # 
         cv2.imshow("video", bgr)
