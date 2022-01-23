@@ -96,11 +96,11 @@ class Camera(object):
 
         left_fit_average = np.average(left_fit, axis=0)
         if len(left_fit) > 0:
-            lane_lines.append(self.make_points(frame, left_fit_average))
+            lane_lines.append(self.make_points(left_fit_average))
 
         right_fit_average = np.average(right_fit, axis=0)
         if len(right_fit) > 0:
-            lane_lines.append(self.make_points(frame, right_fit_average))
+            lane_lines.append(self.make_points(right_fit_average))
 
         logging.debug('lane lines: %s' %
         lane_lines)  # [[[316, 720, 484, 432]], [[1009, 720, 718, 432]]]
