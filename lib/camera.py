@@ -129,11 +129,14 @@ class Camera(object):
             x1, _, x2, _ = lane_lines[0][0]
             x_offset = x2 - x1
             y_offset = int(height / 2)
-        
-        angle_to_mid_radian = math.atan(x_offset / y_offset)  # angle (in radian) to center vertical line
-        angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  # angle (in degrees) to center vertical line
-        steering_angle = angle_to_mid_deg + 90  # this is the steering angle needed by picar front wheel
-        return bgr, mask, edges, lane_lines, steering_angle
+        if len(lane_lines)>1:
+            angle_to_mid_radian = math.atan(x_offset / y_offset)  # angle (in radian) to center vertical line
+            angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  # angle (in degrees) to center vertical line
+            steering_angle = angle_to_mid_deg + 90  # this is the steering angle needed by picar front wheel
+            return bgr, mask, edges, lane_lines, steering_angle
+        else:
+            logging.error("no lane")
+            return bgr, mask, edges, lane_lines, 0
     
     def display_lines(self, frame, lines, line_color=(0, 255, 0), line_width=2):
         line_image = np.zeros_like(frame)
