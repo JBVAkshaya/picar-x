@@ -118,6 +118,7 @@ class Camera(object):
         height, width = self.camera.resolution
         x_offset = 0.0
         y_offset = 0.0
+        logging.debug(f"length lanes: {lane_lines}")
         if len (lane_lines) == 2:
             _, _, left_x2, _ = lane_lines[0][0]
             _, _, right_x2, _ = lane_lines[1][0]
