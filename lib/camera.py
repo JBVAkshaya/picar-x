@@ -32,7 +32,7 @@ class Camera(object):
 
     def get_line_edges(self, bgr, h_lower = 60, h_upper = 150):
         hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-        lower_blue = np.array([h_lower, 50, 50])
+        lower_blue = np.array([h_lower, 40, 40])
         upper_blue = np.array([h_upper, 255, 255])
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
         edges = cv2.Canny(mask, 200, 400)
@@ -119,12 +119,12 @@ class Camera(object):
         line_image = np.zeros_like(frame)
         logging.debug(f"lines: {lines}")
         logging.debug(f"line cord: {lines[0][0]}")
-        x1,y1,x2,y2 = lines[0][0]
-        # if lines is not None:
-        #     for line in lines:
-        #         for x1, y1, x2, y2 in line:
-        cv2.line(line_image, (x1, y1), (x2, y2), line_color, line_width)
-        line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+        # x1,y1,x2,y2 = lines[0][0]
+        if lines is not None:
+            for line in lines:
+                for x1, y1, x2, y2 in line:
+                    cv2.line(line_image, (x1, y1), (x2, y2), line_color, line_width)
+                    line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
         return line_image
 
 if __name__=="__main__":
