@@ -26,7 +26,7 @@ class Controller(object):
         while True:
             offset = interpreter_bus.read()
             self._control(offset, steer_angle)
-            time.delay(delay_time)
+            time.sleep(0.001*delay_time)
 
 # if __name__=="__main__":
 #     sensor = Sensor()
