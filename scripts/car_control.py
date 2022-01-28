@@ -22,8 +22,11 @@ if __name__=="__main__":
     logging.info("Starting multitasking...")
     while True:
         with concurrent.futures.ThreadPoolExecutor(max_workers =3) as executor:
+            logging.debug("start sen")
             eSensor = executor.submit(sensor.sensor_reading, sensor_bus , 200)
+            logging.debug("start inter")
             eInterpreter = executor.submit (interpret.interpret_sensor, sensor_bus, interpret_bus , 150)
+            logging.debug("start control")
             eController = executor.submit (control_car.car_control, interpret_bus , 100, 20)
     
         eSensor.result()
