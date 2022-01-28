@@ -8,6 +8,7 @@ from sensor import Sensor
 import time
 import concurrent.futures
 
+#### Multitasking
 if __name__=="__main__":
     sensor_bus = Bus()
     interpret_bus = Bus()
