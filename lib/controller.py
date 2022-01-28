@@ -22,13 +22,13 @@ class Controller(object):
         return steer_angle
 
     ##### Controller read from interpreter bus and writes to controller bus: Consumer-producer
-    def car_control(self, interpreter_bus, delay_time, steer_angle):
-        
+    def car_control(self, interpreter_bus, delay_time):
+        steer_angle = 20.0
         while True:
             logging.debug("in control")
             offset = interpreter_bus.read()
             self._control(offset, steer_angle)
-            time.sleep(0.001*delay_time)
+            time.sleep(delay_time)
 
 # if __name__=="__main__":
 #     sensor = Sensor()

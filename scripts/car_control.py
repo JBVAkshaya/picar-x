@@ -23,11 +23,11 @@ if __name__=="__main__":
     while True:
         with concurrent.futures.ThreadPoolExecutor(max_workers =3) as executor:
             logging.debug("start sen")
-            eSensor = executor.submit(sensor.sensor_reading, sensor_bus , 200)
+            eSensor = executor.submit(sensor.sensor_reading, sensor_bus , 0.01)
             logging.debug("start inter")
-            eInterpreter = executor.submit (interpret.interpret_sensor, sensor_bus, interpret_bus , 150)
+            eInterpreter = executor.submit (interpret.interpret_sensor, sensor_bus, interpret_bus , 0.01)
             logging.debug("start control")
-            eController = executor.submit (control_car.car_control, interpret_bus , 100, 20)
+            eController = executor.submit (control_car.car_control, interpret_bus , 0.01)
     
         eSensor.result()
         eInterpreter.result()

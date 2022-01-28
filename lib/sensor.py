@@ -34,7 +34,7 @@ class Sensor(object):
         while True:
             logging.debug("in sensor read")
             sensor_bus.write(self._read())
-            time.sleep(0.001*delay_time)
+            time.sleep(delay_time)
 
     def _get_polarity(self, sensor_vals):
         if ((sensor_vals[1] - sensor_vals[0]) < 0 and (sensor_vals[1] - sensor_vals[2]) < 0):

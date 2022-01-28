@@ -98,7 +98,7 @@ class Interpreter(object):
             sensor_vals = sensor_bus.read()
             time.delay(delay_time)
             interpret_bus.write(self._output(sensor_vals))
-            time.sleep(0.001*delay_time)
+            time.sleep(delay_time)
 
 # if __name__ =="__main__":
 #     sensor = Sensor()
