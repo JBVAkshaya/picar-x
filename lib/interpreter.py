@@ -1,5 +1,6 @@
 import logging
 from sensor import Sensor
+import time
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -9,7 +10,7 @@ class Interpreter(object):
         self.polarity = polarity
         self.prev_output = 0.0
         pass
-    def processing(self, sensor_val):
+    def _processing(self, sensor_val):
         '''
         It should then identify if there is a sharp change in the sensor values
         (indicative of an edge), and then using the edge location and sign to determine both whether
@@ -52,12 +53,12 @@ class Interpreter(object):
             logging.error(f"Unknown Polarity: {self.polarity}")
             return 'Err'
 
-    def output(self, sensor_val):
+    def _output(self, sensor_val):
         '''
         The output method should return the position of the robot relative to the line as a value on
         the interval [−1,1], with positive values being to when the line is to the left of the robot.
         '''
-        robot_position = self.processing(sensor_val)
+        robot_position = self._processing(sensor_val)
         if robot_position == 'c':
             self.prev_output = 0.0
             return 0.0
@@ -86,9 +87,20 @@ class Interpreter(object):
             logging.error(f"Unknown Robot Position: {robot_position}")
             return 5.0
 
-if __name__ =="__main__":
-    sensor = Sensor()
-    polarity, sensitivity = sensor.calibrate()
-    interpret = Interpreter(polarity,sensitivity)
-    interpret.processing(sensor.sensor_reading())
-    logging.debug(f"pol, sensi: {polarity,sensitivity}")
+    def interpret_sensor(self, sensor_bus, interpret_bus, delay_time):
+        '''
+        Consumer-Producer method for Interpreter class. 
+        Reads data from sensor bus, process and writes results to interpreter bus.
+        '''
+        while True:
+            sensor_vals = sensor_bus.read()
+            time.delay(delay_time)
+            interpret_bus.write(self._output(sensor_vals))
+            time.delay(delay_time)
+
+# if __name__ =="__main__":
+#     sensor = Sensor()
+#     polarity, sensitivity = sensor.calibrate()
+#     interpret = Interpreter(polarity,sensitivity)
+#     interpret.processing(sensor.sensor_reading())
+#     logging.debug(f"pol, sensi: {polarity,sensitivity}")

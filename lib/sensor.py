@@ -1,6 +1,7 @@
 from cv2 import log
 from adc import ADC
 import logging
+import time
 
 class PolarityException(Exception):
     pass
@@ -16,8 +17,9 @@ class Sensor(object):
         self.chn_0 = ADC("A0")
         self.chn_1 = ADC("A1")
         self.chn_2 = ADC("A2")
+        self.polarity, self.sensitivity = self.calibrate(self._read())
     
-    def sensor_reading(self):
+    def _read(self):
         adc_value_list = []
         adc_value_list.append(self.chn_0.read())
 
@@ -25,7 +27,15 @@ class Sensor(object):
         adc_value_list.append(self.chn_2.read())
         return adc_value_list
 
-    def get_polarity(self, sensor_vals):
+    def sensor_reading(self, sensor_bus, delay_time):
+        '''
+        Sensor data Producer: Publishes the data to sensor_bus bus. 
+        '''
+        while True:
+            sensor_bus.write(self._read())
+            time.delay(delay_time)
+
+    def _get_polarity(self, sensor_vals):
         if ((sensor_vals[1] - sensor_vals[0]) < 0 and (sensor_vals[1] - sensor_vals[2]) < 0):
             return "darker"
         elif ((sensor_vals[1] - sensor_vals[0]) > 0 and (sensor_vals[1] - sensor_vals[2]) > 0):
@@ -33,7 +43,7 @@ class Sensor(object):
         else:
             raise PolarityException(f"No definite Polarity in sensor reading: {sensor_vals}")
 
-    def get_sensitivity(self, sensor_vals):
+    def _get_sensitivity(self, sensor_vals):
         sensitivity = -1
         diff_l_r = abs(sensor_vals[0] - sensor_vals[2])
         diff_l_c = abs(sensor_vals[0] - sensor_vals[1])
@@ -48,13 +58,13 @@ class Sensor(object):
         
         return sensitivity
 
-    def calibrate(self):
+
+    def calibrate(self, sensor_vals):
         # Read sensor value:
         polarity, sensitivity = 'Err', -1
-        sensor_vals = self.sensor_reading()
         try:
-            polarity = self.get_polarity(sensor_vals)
-            sensitivity = self.get_sensitivity(sensor_vals)
+            polarity = self._get_polarity(sensor_vals)
+            sensitivity = self._get_sensitivity(sensor_vals)
         except PolarityException as e:
             logging.exception(e)
         except SensitivityException as e:
@@ -71,7 +81,6 @@ class Sensor(object):
 if __name__=="__main__":
     sensor = Sensor()
     logging.basicConfig(level=logging.DEBUG)
-    logging.debug(f"Sensor reading: {sensor.sensor_reading()}")
+    logging.debug(f"Sensor reading: {sensor._read()}")
     logging.info("Calibrating...")
-    logging.info(f"Sensor Polarity and sensitivity: {sensor.calibrate()}")
-
+    logging.info(f"Sensor Polarity and sensitivity: {sensor.calibrate(sensor._read())}")
