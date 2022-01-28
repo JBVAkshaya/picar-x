@@ -92,8 +92,9 @@ class Interpreter(object):
         Consumer-Producer method for Interpreter class. 
         Reads data from sensor bus, process and writes results to interpreter bus.
         '''
-        
+
         while True:
+            logging.debug("in interpret")
             sensor_vals = sensor_bus.read()
             time.delay(delay_time)
             interpret_bus.write(self._output(sensor_vals))

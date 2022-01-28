@@ -25,6 +25,7 @@ class Controller(object):
     def car_control(self, interpreter_bus, delay_time, steer_angle):
         
         while True:
+            logging.debug("in control")
             offset = interpreter_bus.read()
             self._control(offset, steer_angle)
             time.sleep(0.001*delay_time)

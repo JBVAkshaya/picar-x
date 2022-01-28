@@ -7,6 +7,9 @@ from interpreter import Interpreter
 from sensor import Sensor
 import time
 import concurrent.futures
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 #### Multitasking
 if __name__=="__main__":
@@ -16,7 +19,7 @@ if __name__=="__main__":
     sensor = Sensor()
     interpret = Interpreter(sensor.polarity, sensor.sensitivity)
     control_car = Controller(car)
-
+    logging.info("Starting multitasking...")
     with concurrent.futures.ThreadPoolExecutor(max_workers =3) as executor :
         eSensor = executor.submit(sensor.sensor_reading, sensor_bus , 2)
         eInterpreter = executor.submit (interpret.interpret_sensor, sensor_bus, interpret_bus , 3)
