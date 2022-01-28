@@ -31,6 +31,7 @@ class Sensor(object):
         '''
         Sensor data Producer: Publishes the data to sensor_bus bus. 
         '''
+        
         while True:
             sensor_bus.write(self._read())
             time.sleep(0.001*delay_time)
