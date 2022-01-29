@@ -28,6 +28,7 @@ class Controller(object):
             logging.debug("in control")
             offset = interpreter_bus.read()
             self._control(offset, steer_angle)
+            self.car.forward(20)
             time.sleep(delay_time)
 
 # if __name__=="__main__":
