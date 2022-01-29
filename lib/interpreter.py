@@ -96,7 +96,6 @@ class Interpreter(object):
         while True:
             logging.debug("in interpret")
             sensor_vals = sensor_bus.read()
-            time.delay(delay_time)
             interpret_bus.write(self._output(sensor_vals))
             time.sleep(delay_time)
 
