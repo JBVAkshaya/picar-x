@@ -55,23 +55,23 @@ if __name__=="__main__":
                  termination_busses=default_termination_bus,
                  name="control_c")
     
-    consumer_producer_ultrasonic = ConsumerProducer(ultrasonic_interpret.output, 
-                                        input_busses=ultrasonic_input_bus, 
-                                        output_busses=ultrasonic_interpret_output_bus,
-                                        delay=1.0,
-                                        termination_busses=default_termination_bus,
-                                        name="ultrasonic_interpret_sensor_cp")
-    producer_ultrasonic = Producer(ultrasonic_sensor.read,
-                 ultrasonic_input_bus,
-                 delay=1.0,
-                 termination_busses=default_termination_bus,
-                 name="ultrasonic_p")
+    # consumer_producer_ultrasonic = ConsumerProducer(ultrasonic_interpret.output, 
+    #                                     input_busses=ultrasonic_input_bus, 
+    #                                     output_busses=ultrasonic_interpret_output_bus,
+    #                                     delay=1.0,
+    #                                     termination_busses=default_termination_bus,
+    #                                     name="ultrasonic_interpret_sensor_cp")
+    # producer_ultrasonic = Producer(ultrasonic_sensor.read,
+    #              ultrasonic_input_bus,
+    #              delay=1.0,
+    #              termination_busses=default_termination_bus,
+    #              name="ultrasonic_p")
     
-    consumer_ultrasonic = Consumer(ultrasonic_control.control,
-                 ultrasonic_interpret_output_bus,
-                 delay=1.0,
-                 termination_busses=default_termination_bus,
-                 name="ultrasonic_control_c")
+    # consumer_ultrasonic = Consumer(ultrasonic_control.control,
+    #              ultrasonic_interpret_output_bus,
+                #  delay=1.0,
+                #  termination_busses=default_termination_bus,
+                #  name="ultrasonic_control_c")
 
     timer_producer = Timer(default_termination_bus,  # busses that should be set to true when timer triggers
                  duration=1.0,  # how many seconds the timer should run for (0 is forever)
@@ -79,6 +79,7 @@ if __name__=="__main__":
                  termination_busses=default_termination_bus,
                  name="timer_p")
 
-    producer_consumer_list = [producer, consumer_producer, consumer, producer_ultrasonic, consumer_producer_ultrasonic, consumer_ultrasonic, timer_producer]
+    # producer_consumer_list = [producer, consumer_producer, consumer, producer_ultrasonic, consumer_producer_ultrasonic, consumer_ultrasonic, timer_producer]
+    producer_consumer_list = [producer, consumer_producer, consumer, timer_producer]
 
     rs.runConcurrently(producer_consumer_list)
