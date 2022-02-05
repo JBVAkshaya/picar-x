@@ -1,7 +1,10 @@
 import logging
+from interpret_ultrasonic import InterpretUltrasonic
+from ultrasonic import Ultrasonic
+from picarx_improved import Picarx
 
 class ControlUltrasonic(object):
-    def __init__(self, car, speed=10):
+    def __init__(self, car, speed=30):
         try:
             self.car = car
             self.speed = speed
@@ -18,8 +21,20 @@ class ControlUltrasonic(object):
         '''
         try:
             if status==0:
+                print('status 0')
                 self.car.stop()
             else:
+                print('status 1')
                 self.car.forward(self.speed)
         except:
             logging.info(f"not on pi move status: {status}")
+
+if __name__=="__main__":
+    sense = Ultrasonic()
+    car = Picarx()
+    interp = InterpretUltrasonic()
+    control1 = ControlUltrasonic(car)
+    while True:
+        print(sense.read())
+        print(interp.output(sense.read()))
+        print(control1.control(interp.output(sense.read())))
