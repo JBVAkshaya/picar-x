@@ -74,7 +74,7 @@ if __name__=="__main__":
                 #  name="ultrasonic_control_c")
 
     timer_producer = Timer(default_termination_bus,  # busses that should be set to true when timer triggers
-                 duration=1.0,  # how many seconds the timer should run for (0 is forever)
+                 duration=10.0,  # how many seconds the timer should run for (0 is forever)
                  delay=0,  # how many seconds to sleep for between checking time
                  termination_busses=default_termination_bus,
                  name="timer_p")
