@@ -37,23 +37,23 @@ if __name__=="__main__":
     ultrasonic_control = ControlUltrasonic(car)
 
 
-    # consumer_producer = ConsumerProducer(interpret.output, 
-    #                                     input_busses=sensor_input_bus, 
-    #                                     output_busses=interpret_output_bus,
-    #                                     delay=1.0,
-    #                                     termination_busses=default_termination_bus,
-    #                                     name="interpret_sensor_cp")
-    # producer = Producer(sensor.read,
-    #              sensor_input_bus,
-    #              delay=1.0,
-    #              termination_busses=default_termination_bus,
-    #              name="sensor_p")
+    consumer_producer = ConsumerProducer(interpret.output, 
+                                        input_busses=sensor_input_bus, 
+                                        output_busses=interpret_output_bus,
+                                        delay=1.0,
+                                        termination_busses=default_termination_bus,
+                                        name="interpret_sensor_cp")
+    producer = Producer(sensor.read,
+                 sensor_input_bus,
+                 delay=1.0,
+                 termination_busses=default_termination_bus,
+                 name="sensor_p")
     
-    # consumer = Consumer(control_car.control,
-    #              interpret_output_bus,
-    #              delay=1.0,
-    #              termination_busses=default_termination_bus,
-    #              name="control_c")
+    consumer = Consumer(control_car.control,
+                 interpret_output_bus,
+                 delay=1.0,
+                 termination_busses=default_termination_bus,
+                 name="control_c")
     
     consumer_producer_ultrasonic = ConsumerProducer(ultrasonic_interpret.output, 
                                         input_busses=ultrasonic_input_bus, 
@@ -79,9 +79,9 @@ if __name__=="__main__":
                  termination_busses=default_termination_bus,
                  name="timer_p")
 
-    # producer_consumer_list = [producer, consumer_producer, consumer, producer_ultrasonic, consumer_producer_ultrasonic, consumer_ultrasonic, timer_producer]
+    producer_consumer_list = [producer, consumer_producer, consumer, producer_ultrasonic, consumer_producer_ultrasonic, consumer_ultrasonic, timer_producer]
     # producer_consumer_list = [producer, consumer_producer, consumer, timer_producer]
-    producer_consumer_list = [producer_ultrasonic, consumer_producer_ultrasonic, consumer_ultrasonic, timer_producer]
+    # producer_consumer_list = [producer_ultrasonic, consumer_producer_ultrasonic, consumer_ultrasonic, timer_producer]
 
 
     rs.runConcurrently(producer_consumer_list)
