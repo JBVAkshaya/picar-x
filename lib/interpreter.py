@@ -10,7 +10,7 @@ class Interpreter(object):
         self.polarity = polarity
         self.prev_output = 0.0
         pass
-    def _processing(self, sensor_val):
+    def __processing__(self, sensor_val):
         '''
         It should then identify if there is a sharp change in the sensor values
         (indicative of an edge), and then using the edge location and sign to determine both whether
@@ -53,38 +53,42 @@ class Interpreter(object):
             logging.error(f"Unknown Polarity: {self.polarity}")
             return 'Err'
 
-    def _output(self, sensor_val):
+    def output(self, sensor_val):
         '''
         The output method should return the position of the robot relative to the line as a value on
         the interval [−1,1], with positive values being to when the line is to the left of the robot.
         '''
-        robot_position = self._processing(sensor_val)
-        if robot_position == 'c':
-            self.prev_output = 0.0
-            return 0.0
-        elif robot_position == 'l':
-            self.prev_output = 0.33
-            return 0.33
-        elif robot_position == 'l+':
-            self.prev_output = 0.66
-            return -0.66
-        elif robot_position == 'r':
-            self.prev_output = 0.33
-            return 0.33
-        elif robot_position == 'r+':
-            self.prev_output = 0.66
-            return 0.66
-        elif robot_position == 'o':
-            # if self.prev_output > 0.0:
-            #     return 1.0
-            # elif self.prev_output < 0.0:
-            #     return -1.0
-            # else:
-            #     return 0.0
-            logging.error(f"Out of range robot position: {robot_position}")
-            return 5.0
-        else:
-            logging.error(f"Unknown Robot Position: {robot_position}")
+        try:
+            robot_position = self.__processing__(sensor_val)
+            if robot_position == 'c':
+                self.prev_output = 0.0
+                return 0.0
+            elif robot_position == 'l':
+                self.prev_output = 0.33
+                return 0.33
+            elif robot_position == 'l+':
+                self.prev_output = 0.66
+                return -0.66
+            elif robot_position == 'r':
+                self.prev_output = 0.33
+                return 0.33
+            elif robot_position == 'r+':
+                self.prev_output = 0.66
+                return 0.66
+            elif robot_position == 'o':
+                # if self.prev_output > 0.0:
+                #     return 1.0
+                # elif self.prev_output < 0.0:
+                #     return -1.0
+                # else:
+                #     return 0.0
+                logging.error(f"Out of range robot position: {robot_position}")
+                return 5.0
+            else:
+                logging.error(f"Unknown Robot Position: {robot_position}")
+                return 5.0
+        except:
+            logging.info("Not on pi")
             return 5.0
 
     def interpret_sensor(self, sensor_bus, interpret_bus, delay_time):
@@ -96,7 +100,7 @@ class Interpreter(object):
         while True:
             logging.debug("in interpret")
             sensor_vals = sensor_bus.read()
-            interpret_bus.write(self._output(sensor_vals))
+            interpret_bus.write(self.output(sensor_vals))
             time.sleep(delay_time)
 
 # if __name__ =="__main__":

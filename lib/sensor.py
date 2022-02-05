@@ -14,18 +14,27 @@ class EnvException(Exception):
 
 class Sensor(object):
     def __init__(self):
-        self.chn_0 = ADC("A0")
-        self.chn_1 = ADC("A1")
-        self.chn_2 = ADC("A2")
-        self.polarity, self.sensitivity = self.calibrate(self._read())
-    
-    def _read(self):
-        adc_value_list = []
-        adc_value_list.append(self.chn_0.read())
+        try:
+            self.chn_0 = ADC("A0")
+            self.chn_1 = ADC("A1")
+            self.chn_2 = ADC("A2")
+            self.polarity, self.sensitivity = self.calibrate(self.read())
+        except:
+            logging.info("not on pi!!")
+            self.polarity, self.sensitivity = '_',-1
 
-        adc_value_list.append(self.chn_1.read())
-        adc_value_list.append(self.chn_2.read())
-        return adc_value_list
+    
+    def read(self):
+        try:
+            adc_value_list = []
+            adc_value_list.append(self.chn_0.read())
+
+            adc_value_list.append(self.chn_1.read())
+            adc_value_list.append(self.chn_2.read())
+            return adc_value_list
+        except:
+            logging.info("not on pi!!")
+            return [-1,-1,-1]
 
     def sensor_reading(self, sensor_bus, delay_time):
         '''
@@ -33,7 +42,7 @@ class Sensor(object):
         '''
         while True:
             logging.debug("in sensor read")
-            sensor_bus.write(self._read())
+            sensor_bus.write(self.read())
             time.sleep(delay_time)
 
     def _get_polarity(self, sensor_vals):
@@ -82,6 +91,6 @@ class Sensor(object):
 if __name__=="__main__":
     sensor = Sensor()
     logging.basicConfig(level=logging.DEBUG)
-    logging.debug(f"Sensor reading: {sensor._read()}")
+    logging.debug(f"Sensor reading: {sensor.read()}")
     logging.info("Calibrating...")
-    logging.info(f"Sensor Polarity and sensitivity: {sensor.calibrate(sensor._read())}")
+    logging.info(f"Sensor Polarity and sensitivity: {sensor.calibrate(sensor.read())}")
