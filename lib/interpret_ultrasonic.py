@@ -5,7 +5,7 @@ class InterpretUltrasonic:
         pass
 
     def output(self, sensor_val):
-        if sensor_val < 150:
+        if sensor_val>4.0 and sensor_val < 15:
             return 0
         else: 
             return 1
