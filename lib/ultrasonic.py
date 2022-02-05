@@ -1,11 +1,19 @@
+import logging
 import time
+try:
+    from pin import Pin
+except:
+    logging.info("Not on pi")
 
 
 class Ultrasonic():
-    def __init__(self, trig, echo, timeout=0.02):
-        self.trig = trig
-        self.echo = echo
-        self.timeout = timeout
+    def __init__(self, timeout=0.02):
+        try:
+            self.trig = Pin("D2") 
+            self.echo = Pin("D3")
+            self.timeout = timeout
+        except:
+            logging.info("not on pi")
 
     def _read(self):
         self.trig.low()
@@ -29,8 +37,13 @@ class Ultrasonic():
         return cm
 
     def read(self, times=10):
-        for i in range(times):
-            a = self._read()
-            if a != -1 or a <= 300:
-                return a
-        return -1
+        try:
+            for i in range(times):
+                a = self._read()
+                logging.info(f"ultrasonic sensor reading: {a}")
+                if a != -1 or a <= 300:
+                    return a
+            return -1
+        except:
+            return -1
+    
