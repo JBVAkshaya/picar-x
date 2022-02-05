@@ -5,6 +5,7 @@ try:
 except:
     logging.info("Not on pi")
 
+logging.basicConfig(level=logging.DEBUG)
 
 class Ultrasonic():
     def __init__(self, timeout=0.02):
