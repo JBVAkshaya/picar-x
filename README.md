@@ -28,7 +28,14 @@ git clone https://github.com/JBVAkshaya/picar-x.git
 
 ## Usage
 
-Run the example
+Run the scripts
+
+```bash
+cd scripts
+sudo python3 xxx.py
+```
+
+Run older examples from https://github.com/sunfounder/picar-x.git repository
 
 ```bash
 cd examples
