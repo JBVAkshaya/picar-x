@@ -1,7 +1,7 @@
 
-# PiCar-X Examples
+# PiCar-X Library
 
-PiCar-X examples
+# PiCar-X Examples
 
 Quick Links:
 
